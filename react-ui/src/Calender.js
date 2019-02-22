@@ -8,7 +8,7 @@ import Logo from "./assets/Netflix_Logo_RGB.png";
 class Calendar extends React.Component {
   state = {
     currentMonth: new Date(),
-    currentMonthf: m(new Date()),
+    currentYear: m(new Date()).format('Y'),
     releases: [],
     thisMonthReleases: [],
     fetching: true
@@ -34,6 +34,15 @@ class Calendar extends React.Component {
           fetching: false
         });
       });
+      this.loadCurrentMonth(this.props.match)
+  }
+
+  loadCurrentMonth = (match) => {
+    if(match.params.year && match.params.month){
+      this.setState({
+        currentMonth: `${match.params.month}/1/${match.params.year}`
+      });
+    }
   }
 
   renderHeader = () => {
